@@ -9,10 +9,10 @@ class Solution {
         hm.put('C',100);
         hm.put('D',500);
         hm.put('M',1000);
-        for(int i=0;i<len;i++){
-            if(i<len-1 && (hm.get(s.charAt(i))<hm.get(s.charAt(i+1)))) res+=((-1*hm.get(s.charAt(i++))+hm.get(s.charAt(i))));
+        for(int i=0;i<len-1;i++){
+            if(hm.get(s.charAt(i))<hm.get(s.charAt(i+1))) res-=hm.get(s.charAt(i));
             else res+=hm.get(s.charAt(i));
         }
-        return res;
+        return res+hm.get(s.charAt(len-1));
     }
 }
