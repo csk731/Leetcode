@@ -1,11 +1,13 @@
 public class Solution {
     // you need treat A as an unsigned value
     public int reverseBits(int A) {
-        long ans=0,i=0;
+        int ans=0,i=0;
         while(i<32){
-            if(((A>>i)&1)==1) ans+=Math.pow(2,31-i);
+            ans<<=1;
+            if((A&1)==1) ans|=1;
+            A>>=1;
             i++;
         }
-        return (int)ans;
+        return ans;
     }
 }
