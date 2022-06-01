@@ -4,8 +4,9 @@ class Solution {
         while(i<32){
             int zc=0,oc=0;
             for(int j=0;j<N;j++){
-                if(((A[j]>>i)&1)==1) oc++;
+                if((A[j]&1)==1) oc++;
                 else zc++;
+                A[j]>>=1;
             }
             count+=(zc*oc);
             i++;
