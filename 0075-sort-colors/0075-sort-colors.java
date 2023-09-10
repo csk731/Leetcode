@@ -2,19 +2,20 @@ class Solution {
     public void sortColors(int[] nums) {
         // Stable Algorithm
         int N=nums.length;
-        int pointer=0;
-        for(int i=0;i<N;i++){
+        int i=0,ptr1=0,ptr2=N-1;
+        while(i<=ptr2){
             if(nums[i]==0){
-                nums[i]=nums[pointer];
-                nums[pointer++]=0;
+                nums[i]=nums[ptr1];
+                nums[ptr1]=0;
+                if(i==ptr1) i++;
+                ptr1++;
             }
-        }
-        pointer=N-1;
-        for(int i=N-1;i>=0;i--){
-            if(nums[i]==2){
-                nums[i]=nums[pointer];
-                nums[pointer--]=2;
+            else if(nums[i]==2){
+                nums[i]=nums[ptr2];
+                nums[ptr2]=2;
+                ptr2--;
             }
+            else i++;
         }
     }
 }
