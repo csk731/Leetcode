@@ -1,14 +1,14 @@
 class Solution {
     public boolean checkSubarraySum(int[] nums, int k) {
-        HashMap<Integer, Integer> hm=new HashMap<Integer,Integer>();
-        int N=nums.length;
+        int N=nums.length, sum=0;
+        HashMap<Integer,Integer> hm=new HashMap<>();
         hm.put(0,-1);
-        int sum=0;
         for(int i=0;i<N;i++){
-            sum+=nums[i];
-            sum%=k;
-            if((hm.containsKey(sum) && i-hm.get(sum)>=2)) return true;
-            if(!hm.containsKey(sum)) hm.put(sum,i);
+            sum=(sum%k+nums[i]%k)%k;
+            if(hm.containsKey(sum%k)){
+                if(i-hm.get(sum%k)>=2) return true;
+            }
+            else hm.put(sum%k,i);
         }
         return false;
     }
