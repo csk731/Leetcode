@@ -1,42 +1,37 @@
 class Solution {
-    public void divideAndMerge(int arr[], int s, int e) {
-		if(s==e) return;
-		int mid=(s+e)/2;
-		divideAndMerge(arr, s, mid);
-		divideAndMerge(arr, mid+1, e);
-		merge(arr,s,mid,e);
-	}
-	
-	public void merge(int arr[], int s, int mid, int e) {
-		int alen=mid-s+1;
-		int blen=e-mid;
-		int a[]=new int[alen];
-		int b[]=new int[blen];
-		for(int i=s;i<=mid;i++) {
-			a[i-s]=arr[i];
-		}
-		for(int j=mid+1;j<=e;j++) {
-			b[j-mid-1]=arr[j];
-		}
-		int p1=0,p2=0,p3=s;
-		while(p1<alen && p2<blen) {
-			if(a[p1]<=b[p2]) {
-				arr[p3++]=a[p1++];
-			}
-			else {
-				arr[p3++]=b[p2++];
-			}
-		}
-		while(p1<alen) {
-			arr[p3++]=a[p1++];
-		}
-		while(p2<blen) {
-			arr[p3++]=b[p2++];
-		}
-	}
+    public void sort(int[] nums, int i, int j){
+        if(i==j) return;
+        int mid=(i+j)/2;
+        sort(nums,i,mid);
+        sort(nums,mid+1,j);
+        merge(nums, i, mid, j);
+    }
+    public void merge(int nums[], int i, int mid, int j){
+        int m=mid-i+1, n=j-mid;
+        int arr1[]=new int[m];
+        int arr2[]=new int[n];
+
+        for(int x=0;x<m;x++)
+            arr1[x]=nums[i+x];
+
+        for(int y=0;y<n;y++)
+            arr2[y]=nums[mid+1+y];
+
+        int s=0, e=0, p=i;
+        while(s<m && e<n){
+            if(arr1[s]<arr2[e]) nums[p++]=arr1[s++];
+            else nums[p++]=arr2[e++];
+        }
+        while(s<m){
+            nums[p++]=arr1[s++];
+        }
+        while(e<n){
+            nums[p++]=arr2[e++];
+        }
+    }
     public int[] sortArray(int[] nums) {
-      int N=nums.length;
-			divideAndMerge(nums,0,N-1);
-			return nums;
+        int N=nums.length;
+        sort(nums,0,N-1);
+        return nums;
     }
 }
