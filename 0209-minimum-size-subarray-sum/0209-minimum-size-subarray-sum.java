@@ -1,28 +1,21 @@
 class Solution {
-    public int window(int A[], int size){
-        int N=A.length, sum=0, max=0;
-        for(int i=0;i<N;i++){
-            if(i<size) {
-                sum+=A[i];
-                max=sum;
-            }
-            if(i>=size){
-                sum-=A[i-size];
-                sum+=A[i];
-                max=Math.max(sum,max);
-            }
-        }
-        return max;
-    }
     public int minSubArrayLen(int B, int[] A) {
-        int N=A.length, s=1, e=N;
-        while(s<=e){
-            int mid=(s+e)/2;
-            int maxsum=window(A,mid);
-            if(maxsum==B) return mid;
-            else if(maxsum<B) s=mid+1; 
-            else e=mid-1;
+        int N=A.length, s=0, e=0;
+        int ans=Integer.MAX_VALUE, sum=0;
+        while(e<N){
+            if(sum+A[e]<B){
+                sum+=A[e++];
+            }
+            else{
+                ans=Math.min(ans,e-s+1);
+                if(s!=e) sum-=A[s++];
+                else {
+                    s++;
+                    e++;
+                }
+            }
         }
-        return(s>N)?0:s;
+        if(ans==Integer.MAX_VALUE) return 0;
+        return ans;
     }
 }
