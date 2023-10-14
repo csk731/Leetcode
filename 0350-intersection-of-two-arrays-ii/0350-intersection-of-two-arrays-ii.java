@@ -1,16 +1,17 @@
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
-        HashMap<Integer,Integer> hm=new HashMap<>();
         List<Integer> list=new ArrayList<>();
-        for(int n1:nums1){
-            if(!hm.containsKey(n1)) hm.put(n1,1);
-            else hm.put(n1,hm.get(n1)+1);
-        }
-        for(int n2:nums2){
-            if(hm.containsKey(n2)){
-                list.add(n2);
-                hm.put(n2,hm.get(n2)-1);
-                if(hm.get(n2)==0) hm.remove(n2);
+        int n1=nums1.length, n2=nums2.length;
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int p=0,q=0;
+        while(p<n1 && q<n2){
+            if(nums1[p]<nums2[q]) p++;
+            else if(nums1[p]>nums2[q]) q++;
+            else{
+                list.add(nums1[p]);
+                p++;
+                q++;
             }
         }
         int i=0;
