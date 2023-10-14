@@ -7,13 +7,10 @@ class Solution {
         }
         int max=0;
         for(int i=0;i<N;i++){
-            if(hs.remove(nums[i])){
-                int count=1;
-                int left=nums[i]-1, right=nums[i]+1;
+            if(!hs.contains(nums[i]+1)){
+                int count=0;
+                int left=nums[i];
                 while(hs.remove(left--)){
-                    count++;
-                }
-                while(hs.remove(right++)){
                     count++;
                 }
                 max=Math.max(max,count);
