@@ -9,15 +9,13 @@
  * }
  */
 class Solution {
+    ListNode ans;
+    public ListNode rev(ListNode head){
+        if(head.next==null) return ans=head;
+        return rev(head.next).next=head;
+    }
     public ListNode reverseList(ListNode head) {
-        if(head==null) return null;
-        ListNode x=null, y=head, z=head.next;
-        while(y!=null){
-            y.next=x;
-            x=y;
-            y=z;
-            if(z!=null) z=z.next;
-        }
-        return x;
+        if(head!=null) rev(head).next=null;
+        return ans;
     }
 }
